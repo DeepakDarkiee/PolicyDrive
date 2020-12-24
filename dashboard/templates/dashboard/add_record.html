@@ -1,0 +1,125 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt--7">
+<div class="row">
+<div class="col">
+  <div class="card shadow">
+    <div class="card-header bg-transparent">
+      <h3 class="mb-0">Add New-Policy</h3>
+    </div>
+    <div class="card-body">
+     <div class="container">
+      <form name="myformcont" class="my-2" action="{% url 'add_record' %}" method="POST">
+        {% csrf_token %}
+        <!-- <h2 class="text-center">LIC Form</h2> -->
+        <div class="row jumbotron">
+
+          <!-- <div class="col-sm-12 form-group" style="margin-top: -20px;">
+            <label for="client_id">Client_id :</label>
+            <input type="text" class="form-control" name="client_id" id="name-f" placeholder="Enter your Client_id." required>
+          </div> -->
+
+          <div class="col-sm-12 form-group" style="margin-top: -20px;">
+            <label for="name">Name :</label>
+            <input type="text" class="form-control" name="name" id="name-f" placeholder="Enter your full name." required>
+          </div>
+          
+          <div class="col-sm-12 form-group">
+            <label for="email">Email :</label>
+            <input type="text" class="form-control" name="email" id="name-l" placeholder="Enter your Email" required>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="Date">Date of Birth :</label>
+            <input type="Date" name="dob" class="form-control" id="Date" placeholder="enter your date of birth" required>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="e_group">Contact No.</label>
+            <input type="text" class="form-control" name="contact" id="name-f" placeholder="Enter your contect number" required>
+          </div>
+          <div class="col-sm-12 form-group">
+            <label for="cost_center">Address</label>
+            <input type="text" class="form-control" name="address" id="cost_center" placeholder="Enter your code center" required>
+          </div>
+        <!-- <div class="col-sm-6 form-group">
+            <label for="grade">Policy Type</label>
+            <input type="text" class="form-control" name="policy_type" id="zip" placeholder="Enter grade " required>
+        </div>
+      -->
+      <div class="col-sm-6 form-group">
+        <label for="bname">Policy Number</label>
+        <input type="text" class="form-control" name="policy_number" id="name-l" placeholder="Enter  policy number" required>
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="Dname">Premium</label>
+        <input type="text" class="form-control" name="premium" id="name-l" placeholder="Enter premium" required>
+      </div>
+
+      <div class="col-sm-6 form-group">
+        <label for="Payslip">Sum Assured</label>
+        <input type="text" class="form-control" name="sum_assured" id="address-1" placeholder="enter sum assured" required>
+      </div>
+      
+      
+      <div class="col-sm-6 form-group">
+        <label for="cc description">Year of Policy</label>
+        <input type="text" class="form-control" name="year_of_policy" id="description" placeholder="Enter year of policy" required>
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="pan_no"> Beneficiary Name</label>
+        <input type="text" class="form-control" name="beneficiary_name" id="pan-no" placeholder="Enter beneficiary name" required>
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="created_on">Created On</label>
+        <input type="Date" class="form-control" name="created_on" id="pan-no" placeholder="Enter created on" required>
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="renew_date">Renew Date</label>
+        <input type="date" name="renew_date" data-date-format="DD-MM-YYYY" class="form-control datetimepicker" id="Date" placeholder="Enter renew date" required>
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="type_of_policy">Policy Type</label>
+        <select id="inputType"  name="type" class="form-control browser-default custom-select" required/>
+          <!-- <option disabled>type of policy</option> -->
+            <option disabled="true" selected="selected">-----Select Policy----</option>
+          <option value=0>jan_dhan_yojna</option>
+          <option value=1>jivan_bima</option>
+          <option value=2>jivan_laabh</option>
+        </select>
+      </div>
+      
+
+      <div class="col-sm-6 form-group">
+        <label for="status">status</label>
+        <select id="inputStatus" name="status" class="form-control browser-default custom-select" required>
+          <option  selected="selected">---------</option>
+          <option value=1>active</option>
+          <option value=0>deactive</option>
+          
+        </select>
+      </div>
+
+      <div class="col-sm-12">
+        <input type="checkbox" class="form-check d-inline" id="chb" required><label for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.
+        </label>
+      </div>
+
+      <div class="col-sm-12 form-group mb-0">
+       <button class="btn btn-primary float-right">Submit</button>
+     </div>
+     
+   </div>
+ </form>
+</div> 
+</div>
+</div>
+</div>
+</div>
+
+{% include "dashboard/footer.html" %}
+
+</div>
+
+
+{% endblock content %}
