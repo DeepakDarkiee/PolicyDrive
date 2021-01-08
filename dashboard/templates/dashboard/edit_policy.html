@@ -26,8 +26,13 @@ color: black;
             <div class="row jumbotron">
 
               <div class="col-sm-12 form-group" style="margin-top: -20px;">
-                <label for="name">Name :</label>
-                <input type="text" class="form-control" name="name" id="name-f" placeholder="Enter your full name." value="{{ lics.name }}"/>
+                <label for="name">First Name :</label>
+                <input type="text" class="form-control" name="first_name" id="name-f" placeholder="Enter your full name." value="{{ lics.first_name }}"/>
+              </div>
+
+              <div class="col-sm-12 form-group" style="margin-top: -20px;">
+                <label for="name">Last Name :</label>
+                <input type="text" class="form-control" name="last_name" id="name-f" placeholder="Enter your full name." value="{{ lics.last_name }}"/>
               </div>
               
               <div class="col-sm-12 form-group">
@@ -36,16 +41,28 @@ color: black;
               </div>
               <div class="col-sm-6 form-group">
                 <label for="Date">Date of Birth :</label>
-                <input type="Date" name="dob" class="form-control" id="Date" placeholder="enter your date of birth" value="{{lics.dob|date:'Y-m-d'}}"> 
+                <input type="Date" name="dob" class="form-control" id="Date" placeholder="enter your date of birth" value="{{lics.dob}}"> 
               </div>
               <div class="col-sm-6 form-group">
                 <label for="e_group">Contact No.</label>
                 <input type="text" class="form-control" name="contact" id="name-f" placeholder="Enter your contect number" value="{{ lics.contact }}"/>
               </div>
               <div class="col-sm-12 form-group">
-                <label for="cost_center">Address</label>
-                <input type="text" class="form-control" name="address" id="cost_center" placeholder="Enter your code center" value="{{ lics.address }}"/>
+                <label for="cost_center">Address line 1</label>
+                <input type="text" class="form-control" name="address_line_one" id="cost_center" placeholder="Enter your Address" value="{{ lics.address_line_one }}"/>
               </div>
+              <div class="col-sm-12 form-group">
+                <label for="cost_center">Address line 2</label>
+                <input type="text" class="form-control" name="address_line_two" id="cost_center" placeholder="Enter your Address" value="{{ lics.address_line_two }}"/>
+              </div>
+              <div class="col-sm-6 form-group">
+            <label for="bname">City</label>
+            <input type="text" class="form-control" name="city" id="name-l" placeholder="Enter  city" value="{{ lics.city }}"/>
+          </div>
+          <div class="col-sm-6 form-group">
+            <label for="bname">State</label>
+            <input type="text" class="form-control" name="state" id="name-l" placeholder="Enter  state" value="{{ lics.state }}"/>
+          </div>
           <div class="col-sm-6 form-group">
             <label for="bname">Policy Number</label>
             <input type="text" class="form-control" name="policy_number" id="name-l" placeholder="Enter  policy number" value="{{ lics.policy_number }}"/>
@@ -54,6 +71,32 @@ color: black;
             <label for="Dname">Premium</label>
             <input type="text" class="form-control" name="premium" id="name-l" placeholder="Enter premium" value="{{ lics.premium }}"/>
           </div>
+
+          <div class="col-sm-6 form-group">
+            <label for="type_of_policy">For pay</label>
+            <select id="inputType" value="{{lics.pay_for}}" name="pay_for" class="form-control browser-default custom-select">
+
+              <!-- <option value="" selected="selected">---------</option> -->
+              {% if lics.policy_type == quarterly %}
+              <option value=quarterly selected="selected" >Quarterly</option>
+              {% else %}
+              <option value=quarterly >quarterly</option>
+              {% endif %}
+              {% if lics.policy_type == six_month %}
+              <option value=six_month selected="selected" >Six Month</option>
+              {% else %}
+              <option value=six_month >six_month</option>
+              {% endif %}
+              {% if lics.policy_type == yearly %}
+              <option value=yearly selected="selected" >Yearly</option>
+              {% else %}
+              <option value=yearly >yearly</option>
+               {% endif %}
+
+              
+            </select>
+          </div>
+
 
           <div class="col-sm-6 form-group">
             <label for="Payslip">Sum Assured</label>
@@ -71,33 +114,24 @@ color: black;
           </div>
           <div class="col-sm-6 form-group">
             <label for="created_on">Created On</label>
-            <input type="text" class="form-control" name="created_on" id="pan-no" placeholder="{{lics.created_on|date:'Y-m-d'}}" readonly> 
+            <input type="text" class="form-control" name="created_on" id="pan-no" placeholder="{{lics.created_on}}" readonly> 
           </div>
           <div class="col-sm-6 form-group">
             <label for="renew_date">Renew Date</label>
-            <input type="Date" name="renew_date" class="form-control" id="Date" placeholder="Enter renew date" value="{{lics.renew_date|date:'Y-m-d'}}">  
+            <input type="Date" name="renew_date" class="form-control" id="Date" placeholder="Enter renew date" value="{{lics.renew_date}}">  
           </div>
 
           <div class="col-sm-6 form-group">
             <label for="type_of_policy">Policy Type</label>
             <select id="inputType" value="{{lics.policy_type}}" name="type" class="form-control browser-default custom-select">
 
-     <!-- <option value="" selected="selected">---------</option> -->
-              {% if lics.policy_type == 0 %}
-              <option value=0 selected="selected" >jan_dhan_yojna</option>
-              {% else %}
-              <option value=0 >jan_dhan_yojna</option>
+              <!-- <option value="" selected="selected">---------</option> -->
+              {% for obj in context %}
+              {% if obj.policy_type == lics.policy_type %}
+              <option value={{obj.policy_type}} selected="selected" >{{obj.policy_type}}</option>
               {% endif %}
-              {% if lics.policy_type == 1 %}
-              <option value=1 selected="selected" >jivan_bima</option>
-              {% else %}
-              <option value=1 >jivan_bima</option>
-              {% endif %}
-              {% if lics.policy_type == 2 %}
-              <option value=2 selected="selected" >jivan_laabh</option>
-              {% else %}
-              <option value=2 >jivan_laabh</option>
-               {% endif %}
+             <option value={{obj.policy_type}} >{{obj.policy_type}}</option>
+              {% endfor %}
 
               
             </select>

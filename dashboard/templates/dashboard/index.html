@@ -17,15 +17,15 @@
         <div class="card-header border-0">
           <div class="row align-items-center">
             <div class="col-md-6">
-              <marquee behavior="scroll" direction="up" scrollamount="2"><h3 style="color: red" class="mb-0">Expire in 2Days</h3></marquee>
+              <marquee behavior="scroll" direction="up" scrollamount="2"><h3 style="color: red" class="mb-0">Expire in 2 Days</h3></marquee>
               <br>
               <div class="table-responsive">
                 <table class="table align-items-center table-flush">
                   <thead class="thead-light">
                     <tr>
                       <!-- <th scope="col">Client_Id</th> -->
-                      <th scope="col">Client_Name</th>
-                      <th scope="col">Policy_Type</th>
+                      <th scope="col">Client Name</th>
+                      <th scope="col">Policy Type</th>
                       <th scope="col">Phone Number</th>
                       <th scope="col">Expire On</th>
                       <!-- <th scope="col">Policy_Number</th> -->
@@ -39,7 +39,7 @@
                     {% for obj in towDaysDues %}
                     <tr>
 
-                      <td>{{ obj.name }}</td>
+                      <td>{{ obj.first_name }}</td>
                       <td>
                         {{ obj.get_policy_type_display }}
                       </td>
@@ -62,15 +62,15 @@
 
             </div>
             <div class="col-md-6">
-              <marquee behavior="scroll" direction="up" scrollamount="2"><h3 style="color: red" class="mb-0">Expire in 7Days</h3></marquee>
+              <marquee behavior="scroll" direction="up" scrollamount="2"><h3 style="color: red" class="mb-0">Expire in 7 Days</h3></marquee>
               <br>
               <div class="table-responsive">
                 <table class="table align-items-center table-flush">
                   <thead class="thead-light">
                     <tr>
                       <!-- <th scope="col">Client_Id</th> -->
-                      <th scope="col">Client_Name</th>
-                      <th scope="col">Policy_Type</th>
+                      <th scope="col">Client Name</th>
+                      <th scope="col">Policy Type</th>
                       <th scope="col">Phone Number</th>
                       <th scope="col">Expire On</th>
                       <!-- <th scope="col">Policy_Number</th> -->
@@ -84,7 +84,7 @@
                     {% for obj in weekDues %}
                     <tr>
 
-                      <td>{{ obj.name }}</td>
+                      <td>{{ obj.first_name }}</td>
                       <td>
                         {{ obj.get_policy_type_display }}
                       </td>

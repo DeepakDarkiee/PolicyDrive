@@ -33,16 +33,3 @@ def counter(request):
 
 
 
-# def image(request):
-
-#     from dashboard.models import register_table
-
-#     context = {}
-#     check = register_table.objects.filter(user__id=request.user.id)
-#     if len(check)>0:
-#         data = register_table.objects.get(user__id=request.user.id)
-#         context["data"] = data
-#         return {
-#         'context':context,
-#         }
-#     return {}  

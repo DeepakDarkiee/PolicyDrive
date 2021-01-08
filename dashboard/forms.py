@@ -1,6 +1,7 @@
 from django import forms  
 from.models import *
 from django.contrib.auth.models import User  
+#from Admin.models import Designations,Salary
 
 
 class ContactForm(forms.Form):		
@@ -11,7 +12,9 @@ class ContactForm(forms.Form):
 
 
 
-# class LicForm(forms.ModelForm):  
-#     class Meta:  
-#         model = Lic  
-#         fields = "__all__"  	
+class File_Upload(forms.ModelForm):  
+    class Meta:  
+        model = Drive  
+        fields = ['file']  	
+
+

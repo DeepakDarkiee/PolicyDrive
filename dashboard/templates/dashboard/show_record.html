@@ -77,9 +77,9 @@
               {% for lic in page_obj %}  
               <tr>
 
-                <td>{{ lic.name }}</td>
+                <td>{{ lic.first_name }}</td>
                 <td>
-                  {{ lic.get_policy_type_display }}
+                  {{ lic.policy_type }}
                 </td>
                 <td>
                   <span class="badge badge-dot mr-4">
@@ -128,10 +128,10 @@
                               <span style="color:red" aria-hidden="true">×</span>
                             </button>
                           </div>
-                          <div style="color: black" class="modal-body">Are you sure you want to <span style="color: red" >Delete Record?</span></div>
+                          <div style="color: black" class="modal-body">Are you sure you want to <span style="color: red" >Delete policy?</span></div>
                           <div class="modal-footer">
                             <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal">Cancel</button>
-                            <a style="background-color: #825ee4" class="btn btn-sm btn-primary" href="/delete_policy/{{ lic.id }}">Delete</a>
+                            <a style="background-color: #825ee4" class="btn btn-sm btn-primary" href="{% url 'delete_policy' lic.id %}">Delete</a>
 
                           </div>
                         </div>
@@ -150,8 +150,8 @@
                           <div style="color: black" class="modal-body">Please select format of file. <span style="color: red"> Choose One Of Them</span></div>
                          <form method="post" enctype="multipart/form-data" action="/export/">
                           {% csrf_token %}                          
-                          <select name="file-format" class="form-control my-3">
-                            <option disabled="true" selected>Choose format...</option>
+                          <select name="file-format" class="form-control my-3" required>
+                            <option disabled="true" value="" selected>Choose format...</option >
                             <option>CSV</option>
                             <option>JSON</option>
                             <option>XLS (Excel)</option>
@@ -179,8 +179,8 @@
                           <form method="post" enctype="multipart/form-data" action="{% url 'import_data' %}">
                             {% csrf_token %}
                             <input type="file" name="importData" style="margin-left:20px">
-                            <select name="file-format" class="form-control my-3">
-                              <option disabled="true" selected>Choose format...</option>
+                            <select name="file-format" class="form-control my-3" required="">
+                              <option disabled="true" value="" selected>Choose format...</option>
                               <option>CSV</option>
                               <option>XLS (Excel)</option>
                               <option>JSON</option>

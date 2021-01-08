@@ -3,27 +3,26 @@
 {% block content %}
 
 <div class="container-fluid mt--7">
-<div class="row">
-<div class="col">
-  <div class="card shadow">
-    <div class="card-header bg-transparent">
-      <h3 class="mb-0">Add New-Policy</h3>
-    </div>
-    <div class="card-body">
-     <div class="container">
-      <form name="myformcont" class="my-2" action="{% url 'add_record' %}" method="POST">
-        {% csrf_token %}
-        <!-- <h2 class="text-center">LIC Form</h2> -->
-        <div class="row jumbotron">
-
-          <!-- <div class="col-sm-12 form-group" style="margin-top: -20px;">
-            <label for="client_id">Client_id :</label>
-            <input type="text" class="form-control" name="client_id" id="name-f" placeholder="Enter your Client_id." required>
-          </div> -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">Add New-Policy</h3>
+        </div>
+        <div class="card-body">
+         <div class="container">
+          <form name="myformcont" class="my-2" action="{% url 'add_record' %}" method="POST">
+            {% csrf_token %}
+            <!-- <h2 class="text-center">LIC Form</h2> -->
+            <div class="row jumbotron">
 
           <div class="col-sm-12 form-group" style="margin-top: -20px;">
-            <label for="name">Name :</label>
-            <input type="text" class="form-control" name="name" id="name-f" placeholder="Enter your full name." required>
+            <label for="name">First Name :</label>
+            <input type="text" class="form-control" name="first_name" id="name-f" placeholder="Enter your First Name." required>
+          </div>
+          <div class="col-sm-12 form-group" style="margin-top: -20px;">
+            <label for="name">Last Name :</label>
+            <input type="text" class="form-control" name="last_name" id="name-f" placeholder="Enter your Last Name." required>
           </div>
           
           <div class="col-sm-12 form-group">
@@ -36,17 +35,29 @@
           </div>
           <div class="col-sm-6 form-group">
             <label for="e_group">Contact No.</label>
-            <input type="text" class="form-control" name="contact" id="name-f" placeholder="Enter your contect number" required>
+            <input type="text" class="form-control" name="contact" id="name-f" placeholder="Enter your contact number" required>
           </div>
           <div class="col-sm-12 form-group">
-            <label for="cost_center">Address</label>
-            <input type="text" class="form-control" name="address" id="cost_center" placeholder="Enter your code center" required>
+            <label for="cost_center">Address Line 1</label>
+            <input type="text" class="form-control" name="address_line_one" id="cost_center" placeholder="Enter your address " required>
           </div>
-        <!-- <div class="col-sm-6 form-group">
-            <label for="grade">Policy Type</label>
-            <input type="text" class="form-control" name="policy_type" id="zip" placeholder="Enter grade " required>
-        </div>
-      -->
+          <div class="col-sm-12 form-group">
+            <label for="cost_center">Address Line 2</label>
+            <input type="text" class="form-control" name="address_line_two" id="cost_center" placeholder="Enter your address" required>
+          </div>
+          <div class="col-sm-6 form-group">
+        <label for="bname">Lendmark</label>
+        <input type="text" class="form-control" name="lendmark" id="name-l" placeholder="Enter  Lendmark" required>
+      </div>
+          <div class="col-sm-6 form-group">
+        <label for="bname">City</label>
+        <input type="text" class="form-control" name="city" id="name-l" placeholder="Enter City" required>
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="bname">State</label>
+        <input type="text" class="form-control" name="state" id="name-l" placeholder="Enter  State" required>
+      </div>
+          
       <div class="col-sm-6 form-group">
         <label for="bname">Policy Number</label>
         <input type="text" class="form-control" name="policy_number" id="name-l" placeholder="Enter  policy number" required>
@@ -55,6 +66,17 @@
         <label for="Dname">Premium</label>
         <input type="text" class="form-control" name="premium" id="name-l" placeholder="Enter premium" required>
       </div>
+
+      <div class="col-sm-6 form-group">
+        <label for="type_of_policy">Pay For</label>
+        <select id="inputType"  name="pay_for" class="form-control browser-default custom-select" required/>
+        <!-- <option disabled>type of policy</option> -->
+        <option disabled="true" selected="selected">-----Select ----</option>
+        <option value="quarterly">Quarterly</option>
+        <option value="six_month">Six Month</option>
+        <option value="yearly">Yearly</option>
+      </select>
+    </div>
 
       <div class="col-sm-6 form-group">
         <label for="Payslip">Sum Assured</label>
@@ -81,24 +103,14 @@
       <div class="col-sm-6 form-group">
         <label for="type_of_policy">Policy Type</label>
         <select id="inputType"  name="type" class="form-control browser-default custom-select" required/>
-          <!-- <option disabled>type of policy</option> -->
-            <option disabled="true" selected="selected">-----Select Policy----</option>
-          <option value=0>jan_dhan_yojna</option>
-          <option value=1>jivan_bima</option>
-          <option value=2>jivan_laabh</option>
-        </select>
-      </div>
+        <!-- <option disabled>type of policy</option> -->
+        <option disabled="true" selected="selected">-----Select Policy----</option>{% for obj in context %}
+        <option value="{{obj.policy_type}}">{{obj.policy_type}}</option>
+        {% endfor %}
+       
       
-
-      <div class="col-sm-6 form-group">
-        <label for="status">status</label>
-        <select id="inputStatus" name="status" class="form-control browser-default custom-select" required>
-          <option  selected="selected">---------</option>
-          <option value=1>active</option>
-          <option value=0>deactive</option>
-          
-        </select>
-      </div>
+      </select>
+    </div>
 
       <div class="col-sm-12">
         <input type="checkbox" class="form-check d-inline" id="chb" required><label for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.

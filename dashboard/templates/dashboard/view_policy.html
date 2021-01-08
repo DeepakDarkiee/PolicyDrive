@@ -25,10 +25,15 @@ color: black;
             
             <div class="row jumbotron">
 
-              <div class="col-sm-12 form-group" style="margin-top: -20px;">
-                <label for="name">Name :</label>
-                <input type="text" class="form-control" name="name" id="name-f" placeholder="Enter your full name." value="{{ lics.name }}"readonly>
-              </div>
+               <div class="col-sm-12 form-group" style="margin-top: -20px;">
+            <label for="name">First Name :</label>
+            <input type="text" class="form-control" value="{{lics.first_name}}" name="first_name" id="name-f" placeholder="Enter your First Name." readonly>
+          </div>
+          <div class="col-sm-12 form-group" style="margin-top: -20px;">
+            <label for="name">Last Name :</label>
+            <input type="text" class="form-control" name="last_name" value="{{lics.last_name}}" id="name-f" placeholder="Enter your Last Name." readonly>
+          </div>
+          
               
               <div class="col-sm-12 form-group">
                 <label for="email">Email :</label>
@@ -36,16 +41,32 @@ color: black;
               </div>
               <div class="col-sm-6 form-group">
                 <label for="Date">Date of Birth :</label>
-                <input type="Date" name="dob" class="form-control" id="Date" placeholder="enter your date of birth" value="{{lics.dob|date:'Y-m-d'}}" readonly> 
+                <input type="Date" name="dob" class="form-control" id="Date" placeholder="enter your date of birth" value="{{lics.dob}}" readonly> 
               </div>
               <div class="col-sm-6 form-group">
                 <label for="e_group">Contact No.</label>
                 <input type="text" class="form-control" name="contact" id="name-f" placeholder="Enter your contect number" value="{{ lics.contact }}" readonly>
               </div>
-              <div class="col-sm-12 form-group">
-                <label for="cost_center">Address</label>
-                <input type="text" class="form-control" name="address" id="cost_center" placeholder="Enter your code center" value="{{ lics.address }}" readonly>
-              </div>
+                <div class="col-sm-12 form-group">
+            <label for="cost_center">Address Line 1</label>
+            <input type="text" class="form-control" name="address_line_one" value="{{lics.address_line_one}}" id="cost_center" placeholder="Enter your address " readonly>
+          </div>
+          <div class="col-sm-12 form-group">
+            <label for="cost_center">Address Line 2</label>
+            <input type="text" class="form-control" name="address_line_two" value="{{lics.address_line_two}}"  id="cost_center" placeholder="Enter your address" readonly>
+          </div>
+          <div class="col-sm-6 form-group">
+        <label for="bname">Lendmark</label>
+        <input type="text" class="form-control" name="lendmark" value="{{lics.lendmark}}" id="name-l" placeholder="Enter  Lendmark" readonly>
+      </div>
+          <div class="col-sm-6 form-group">
+        <label for="bname">City</label>
+        <input type="text" class="form-control" name="city" value="{{lics.city}}" id="name-l" placeholder="Enter City" readonly>
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="bname">State</label>
+        <input type="text" class="form-control" name="state" value="{{lics.state}}" id="name-l" placeholder="Enter  State" readonly>
+      </div>
           <div class="col-sm-6 form-group">
             <label for="bname">Policy Number</label>
             <input type="text" class="form-control" name="policy_number" id="name-l" placeholder="Enter  policy number" value="{{ lics.policy_number }}" readonly>
@@ -54,6 +75,10 @@ color: black;
             <label for="Dname">Premium</label>
             <input type="text" class="form-control" name="premium" id="name-l" placeholder="Enter premium" value="{{ lics.premium }}" readonly>
           </div>
+           <div class="col-sm-6 form-group">
+        <label for="type_of_policy">Pay For</label>
+         <input type="type" name="type" class="form-control" id="inputType" placeholder="" value="{{lics.get_pay_for_display}}" readonly>
+    </div>
 
           <div class="col-sm-6 form-group">
             <label for="Payslip">Sum Assured</label>
@@ -75,17 +100,17 @@ color: black;
           </div> -->
           <div class="col-sm-6 form-group">
             <label for="renew_date">Created On</label>
-            <input type="text" name="created_on" class="form-control" id="pan-no" placeholder="Enter created date" value="{{lics.created_on|date:'Y-m-d'}}" readonly>  
+            <input type="text" name="created_on" class="form-control" id="pan-no" placeholder="Enter created date" value="{{lics.created_on}}" readonly>  
           </div>
 
           <div class="col-sm-6 form-group">
             <label for="renew_date">Renew Date</label>
-            <input type="Date" name="renew_date" class="form-control" id="Date" placeholder="Enter renew date" value="{{lics.renew_date|date:'Y-m-d'}}" readonly>  
+            <input type="Date" name="renew_date" class="form-control" id="Date" placeholder="Enter renew date" value="{{lics.renew_date}}" readonly>  
           </div>
           
           <div class="col-sm-6 form-group">
             <label for="renew_date">Policy Type</label>
-            <input type="type" name="type" class="form-control" id="inputType" placeholder="" value="{{lics.get_policy_type_display}}" readonly>  
+            <input type="type" name="type" class="form-control" id="inputType" placeholder="" value="{{lics.policy_type}}" readonly>  
           </div>
 
           <div class="col-sm-6 form-group">

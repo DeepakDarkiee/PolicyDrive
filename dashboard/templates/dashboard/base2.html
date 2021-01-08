@@ -139,8 +139,18 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link " href="{% url 'add-policy'%}">
+              <i class="ni ni-book-bookmark text-red"></i>Add Policy-Type
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link " href="{% url 'add_record'%}">
               <i class="ni ni-planet text-blue"></i>Add New-Policy
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'show_record' %}">
+              <i class="ni ni-bullet-list-67 text-info"></i>Show-Policy
             </a>
           </li>
           <li class="nav-item">
@@ -153,11 +163,7 @@
               <i class="ni ni-single-02 text-yellow"></i> User profile
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link " href="{% url 'show_record' %}">
-              <i class="ni ni-bullet-list-67 text-info"></i>Show-Policy
-            </a>
-          </li>
+          
 
           <li class="nav-item">
             <a class="nav-link" href="{% url 'user_logout' %}">

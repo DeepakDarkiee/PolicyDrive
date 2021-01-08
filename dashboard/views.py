@@ -9,7 +9,7 @@ from pms import settings
 from django.utils.decorators import method_decorator
 import csv
 from django.core.paginator import Paginator
-from .models import Lic
+from .models import Lic,PolicyType
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
@@ -19,7 +19,7 @@ from django import template
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
-from dashboard.models import Lic
+from dashboard.models import Lic,Drive
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 from django.contrib import messages
@@ -33,9 +33,10 @@ from django.http import HttpResponse
 from django.http import FileResponse
 #from pms.settings import register_pms
 import xlwt 
+from dashboard.functions import handle_uploaded_file  
 from .resources import LicResource
 from tablib import Dataset
-
+from .forms import File_Upload 
 
 
 @login_required
@@ -63,42 +64,52 @@ def index(request):
         })
 
 
-#test
+
 @login_required
 def performance(request):
     return render(request,"dashboard/performance.html")
+
+
 
 
 @login_required
 def add_record(request):
     if request.method == "POST":
         user = User.objects.get(username = request.user)
-        name  = request.POST.get('name') 
+        first_name  = request.POST.get('first_name') 
+        last_name  = request.POST.get('last_name')
         email = request.POST.get('email')
         dob = request.POST.get('dob')
         contact =request.POST.get('contact')
-        address = request.POST.get('address')
+        address_line_one = request.POST.get('address_line_one')
+        address_line_two = request.POST.get('address_line_two')
+        lendmark= request.POST.get('lendmark')
+        city= request.POST.get('city')
+        state= request.POST.get('state')
         policy_number=request.POST.get('policy_number')
         premium= request.POST.get('premium')
         sum_assured= request.POST.get('sum_assured')
         year_of_policy = request.POST.get('year_of_policy')
+        pay_for = request.POST.get('pay_for')
         beneficiary_name =request.POST.get('beneficiary_name')
         created_on =request.POST.get('created_on')
         renew_date=request.POST.get('renew_date')
-        policy_type=request.POST.get('type')
-        status=request.POST.get('status')
-        obj=Lic(email=email,name=name,
-        dob=dob,contact=contact,address = address,policy_number=policy_number,
-        premium=premium,sum_assured=sum_assured,year_of_policy=year_of_policy,beneficiary_name=beneficiary_name,
-        created_on=created_on,renew_date=renew_date,policy_type=policy_type,status=status,user = user)
+        policy_type=PolicyType.objects.get(policy_type=request.POST.get('type'))
+        #status=request.POST.get('status')
+        obj=Lic(email=email,first_name=first_name,last_name=last_name,address_line_one=address_line_one,address_line_two=address_line_two,lendmark=lendmark,city=city,state=state,
+        dob=dob,contact=contact,policy_number=policy_number,
+        premium=premium,sum_assured=sum_assured,year_of_policy=year_of_policy,pay_for=pay_for,beneficiary_name=beneficiary_name,
+        created_on=created_on,renew_date=renew_date,policy_type=policy_type,user = user)
         obj.save()
         #register_pms(email) 
         messages.success(request, ' Successfully Saved ')
         return redirect("/show_record")                 
-    
-    return render(request,'dashboard/add_record.html') 
+    policy_type=PolicyType.objects.all()
+    return render(request,'dashboard/add_record.html',{'context':policy_type}) 
             
-     
+
+
+    
     
 @login_required
 def show_record(request):
@@ -113,7 +124,8 @@ def show_record(request):
 @login_required
 def edit_policy(request, id):  
     lics = Lic.objects.get(id=id) 
-    return render(request,'dashboard/edit_policy.html', {'lics':lics})      
+    policy_type=PolicyType.objects.all()
+    return render(request,'dashboard/edit_policy.html', {'lics':lics,'context':policy_type})      
 
 
 @login_required
@@ -123,23 +135,42 @@ def view_policy(request, id):
 
 
 @login_required
+def add_policy(request):
+    if request.method == "POST":
+        user = User.objects.get(username = request.user)
+        policy_type  = request.POST.get('policy_type')
+        obj=PolicyType(policy_type=policy_type,user=user)
+        obj.save()
+        messages.success(request, ' Successfully Saved ')
+        return redirect("/add-policy")
+
+    return render(request,"dashboard/add_policy.html")
+
+
+
+@login_required
 def update_policy(request, id):  
     lics = Lic.objects.get(id=id)  
     if request.method == "POST":
         user = User.objects.get(username = request.user)
-        lics.name  = request.POST.get('name','') 
+        lics.first_name  = request.POST.get('first_name','') 
+        lics.last_name  = request.POST.get('last_name','')
         lics.email = request.POST.get('email','')
         lics.dob = request.POST.get('dob','')
         lics.contact =request.POST.get('contact','')
-        lics.address = request.POST.get('address','')
+        lics.address_line_one = request.POST.get('address_line_one','')
+        lics.address_line_two = request.POST.get('address_line_two','')
+        lics.city=request.POST.get('city','')
+        lics.state=request.POST.get('state','')
         lics.policy_number=request.POST.get('policy_number','')
         lics.premium= request.POST.get('premium','')
+        lics.pay_for = request.POST.get('pay_for','')
         lics.sum_assured= request.POST.get('sum_assured','')
         lics.year_of_policy = request.POST.get('year_of_policy','')
         lics.beneficiary_name =request.POST.get('beneficiary_name','')
-        # lics.created_on =request.POST.get('created_on','')
         lics.renew_date=request.POST.get('renew_date','')
-        lics.policy_type=request.POST.get('type','')
+        # lics.policy_type=request.POST.get('type','')
+        lics.policy_type=PolicyType.objects.get(policy_type=request.POST.get('type',''))
         lics.status=request.POST.get('status','')
         lics.save()
         messages.success(request, ' Successfully Updated ')
@@ -250,24 +281,41 @@ def import_data(request):
     return redirect('/show_record')   
  
 
+ 
+
+def my_drive(request):    
+    if request.method == 'POST': 
+        user = User.objects.get(username = request.user)
+        print(user)
+        drive = File_Upload(request.POST, request.FILES) 
+        print(drive) 
+        if drive.is_valid():  
+            handle_uploaded_file(request.FILES['file'])
+            obj=drive.save(commit=False)   
+            obj.user = request.user
+            obj.save()
+            return redirect('/my-drive')   
+    else:  
+        drive = File_Upload()  
+        user = User.objects.get(username = request.user)
+        objs = Drive.objects.filter(user__pk=user.id) 
+        return render(request,"dashboard/my_drive.html",{'form':drive,'objs':objs}) 
 
 
-# def excel_import(request):
-#     if request.method == 'POST':
-#         lic_resource = LicResource()
-#         dataset = Dataset()
-#         new_lics = request.FILES['myfile']
 
-#         imported_data = dataset.load(new_lics.read())
-#         result = lic_resource.import_data(dataset, dry_run=True)  
-
-#         if not result.has_errors():
-#             lic_resource.import_data(dataset, dry_run=False)  
-
-#     return render(request, 'dashboard/excel.html')
+@login_required
+def delete_drive(request, id):
+    objs = Drive.objects.get(id=id)
+    objs.delete()
+    messages.success(request, 'Successfully Deleted')
+    return redirect('/my-drive')     
 
 
-
-
-
-
+@login_required
+def download(request,path):
+    file_path=os.path.join(settings.MEDIA_ROOT,path)
+    if os.path.exists(file_path):
+        with open(file_path,'rb')as fh:
+            response=HttpResponse(fh.read(),content_type="application/adminupload")
+            response['content-Disposition']='inline;filename='+os.path.basename(file_path)
+            return response
