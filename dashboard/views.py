@@ -195,9 +195,25 @@ class SearchResultsView(ListView):
     def get_queryset(self):
         query = self.request.GET.get('q') # new
         object_list = Lic.objects.filter(
-            Q(name__icontains=query) | Q(policy_number__icontains=query)
+            Q(first_name__icontains=query) | Q(policy_number__icontains=query)
         )
         return object_list
+
+
+
+class SearchView(ListView):
+    model = Drive
+    template_name = 'dashboard/search_file.html'
+    
+    def get_queryset(self):
+        query = self.request.GET.get('qr') # new
+        objects_list = Drive.objects.filter(
+            Q(file='query')
+        )
+        print(objects_list)
+        return objects_list
+
+
 
 
 

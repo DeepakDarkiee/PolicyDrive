@@ -35,7 +35,7 @@ class Lic(models.Model):
     last_name = models.CharField(max_length=50)
     email= models.EmailField(max_length=50)
     dob=models.CharField(max_length=50)
-    contact=models.IntegerField()
+    contact=models.CharField(max_length=50)
     address_line_one=models.CharField(max_length=100)
     address_line_two=models.CharField(max_length=100)
     lendmark=models.CharField(max_length=100,default=None)
@@ -60,6 +60,7 @@ class Lic(models.Model):
 
        
 class Drive(models.Model):
+    file_name = models.CharField(max_length=20)
     file = models.FileField()
     added_on =models.DateTimeField(auto_now_add=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
@@ -67,8 +68,7 @@ class Drive(models.Model):
 
 
     def __str__(self):
-        return self.file.name
-
+        return self.file_name
    
 
    

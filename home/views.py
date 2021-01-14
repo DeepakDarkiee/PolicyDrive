@@ -29,8 +29,8 @@ def search(request):
     return render(request,'home/search.html')
 
 
-def services(request):
-    return render(request,'home/services.html')    
+# def services(request):
+#     return render(request,'home/services.html')    
 
 
 

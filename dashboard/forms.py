@@ -15,6 +15,6 @@ class ContactForm(forms.Form):
 class File_Upload(forms.ModelForm):  
     class Meta:  
         model = Drive  
-        fields = ['file']  	
+        fields = ['file_name','file']  	
 
 

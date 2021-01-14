@@ -38,7 +38,7 @@
               {% for lic in object_list %}  
               <tr>
                 
-                <td>{{ lic.name }}</td>
+                <td>{{ lic.first_name }}</td>
                 <td>
                   {{ lic.get_policy_type_display }}
                 </td>
@@ -52,21 +52,14 @@
                     <i class="bg-warning"></i> {{ lic.year_of_policy }}
                   </span>
                 </td> 
-                <!-- <td>
-                  <div class="avatar-group">
-                    {{ lic.year_of_policy }}
-
-                  </div>
-                </td> -->
+                
                 <td>
                   <div class="d-flex align-items-center">
                     <span class="mr-2">{{ lic.premium }}</span>
                     
                   </div>
                 </td>
-                <!-- <td class="text-right">
-                  {{ lic.status }}
-                </td> -->
+                
                 <td>
                   <div class="d-flex align-items-center">
                     <span class="mr-2">{{ lic.get_status_display }}</span>

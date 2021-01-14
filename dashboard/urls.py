@@ -20,6 +20,7 @@ urlpatterns = [
     #path("delete_policy",views.delete_policy, name="delete_policy"),
     path('delete_policy/<int:id>', views.delete_policy,name='delete_policy'),      
     path('search_record/', views.SearchResultsView.as_view(),name='search_record'),
+    path('search-file/', views.SearchView.as_view(),name='search-file'),
     path('sort_record/', views.sort_record, name='sort_record'),
     #path('csv/',views.getfile),
     #path('excel_import/',views.excel_import, name="excel_import"), 
