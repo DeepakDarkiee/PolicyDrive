@@ -25,7 +25,7 @@ SECRET_KEY = 'f#blr)4^1!w+u43_vhf8p2(u)2^zr(fja*l$$3yaz#0j(zknii'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pms.dsmie.com']
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
